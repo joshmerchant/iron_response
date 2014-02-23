@@ -8,6 +8,7 @@ module IronResponse
     attr_accessor :config
     attr_accessor :name
     attr_accessor :params_array
+    attr_accessor :options
     attr_accessor :results
     attr_accessor :code
 
@@ -23,7 +24,7 @@ module IronResponse
     def run!
       task_ids = params_array.map do |params|
         params[:config] = @config
-        @client.tasks.create(worker_name, params)._id
+        @client.tasks.create(worker_name, params, options)._id
       end
 
       task_ids.map do |task_id|
