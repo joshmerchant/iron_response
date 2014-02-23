@@ -26,7 +26,7 @@ module IronResponse
       task_ids = params_array.map do |params|
         params[:config] = @config
         p "OPTIONS: #{@options.inspect}"
-        @client.tasks.create(worker_name, params, {'priority': 2})._id
+        @client.tasks.create(worker_name, params, {'priority' => 2})._id
       end
 
       task_ids.map do |task_id|
