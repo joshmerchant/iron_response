@@ -14,6 +14,7 @@ module IronResponse
 
     def initialize(config)
       @config = config
+      @options = {}
       @client = IronWorkerNG::Client.new(@config[:iron_io])
     end
 
@@ -24,7 +25,7 @@ module IronResponse
     def run!
       task_ids = params_array.map do |params|
         params[:config] = @config
-        @client.tasks.create(worker_name, params, options)._id
+        @client.tasks.create(worker_name, params, @options)._id
       end
 
       task_ids.map do |task_id|
